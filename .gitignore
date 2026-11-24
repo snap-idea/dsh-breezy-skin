@@ -1,0 +1,18 @@
+# 依赖
+node_modules/
+
+# 系统文件
+.DS_Store
+
+# 源素材：WorkBuddy 外观包与其解包结果，随源码分发会违反素材授权。
+# 插件运行时不引用这些目录 —— 它们只是 assets/ 下已提交产物的来源，
+# 保留在本地用于重新生成。
+*.zip
+.work/
+build/
+design/
+workbuddy-favicon/
+
+# Python
+__pycache__/
+*.pyc

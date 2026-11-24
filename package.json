@@ -1,0 +1,48 @@
+{
+  "name": "breezy-skin",
+  "version": "0.1.0",
+  "description": "Breezy (有风) skin for DeepSeek Harness Web: overrides 107 --dsw-alias-* semantic tokens plus 10 --dsw-specific-* component tokens, and scopes a nature background image to the new-session welcome screen. Host-only Cordis plugin — no browser extension, no CDP, no client bundle.",
+  "type": "module",
+  "main": "src/index.js",
+  "icon": "./assets/icon.png",
+  "exports": {
+    ".": "./src/index.js",
+    "./package.json": "./package.json",
+    "./locale/*.json": "./locale/*.json"
+  },
+  "files": [
+    "src",
+    "assets",
+    "locale",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "skin",
+    "theme",
+    "cordis",
+    "breezy"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "theme": "python3 scripts/gen-theme.py",
+    "audit": "python3 scripts/audit-contrast.py",
+    "check": "node --check src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github-snap-idea/snap-idea/dsh-breezy-skin.git"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}

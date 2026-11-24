@@ -1,0 +1,6 @@
+# breezy-skin bundle patch: 把插件行插入 profile roster。
+# Host 半侧提供 /_breezy-skin/bg.jpg 背景图路由，并通过
+# webserver/index-inject 向 index.html 注入主题样式表。
+- insert:
+    - id: breezy-skin
+      name: 'breezy-skin'

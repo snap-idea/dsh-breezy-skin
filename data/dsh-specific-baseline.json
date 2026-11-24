@@ -1,0 +1,46 @@
+{
+  "--dsw-specific-bubble": {
+    "light": "#edf3fe",
+    "dark": "#2c2c2e"
+  },
+  "--dsw-specific-bubble-highlight": {
+    "light": "#d3e2ff",
+    "dark": "#43454a"
+  },
+  "--dsw-specific-input-major": {
+    "light": "#fff",
+    "dark": "#2c2c2e"
+  },
+  "--dsw-specific-login-input": {
+    "light": "#f9fafb",
+    "dark": "#1b1b1c"
+  },
+  "--dsw-specific-menu": {
+    "light": "var(--dsw-menu-surface-fill)",
+    "dark": "var(--dsw-menu-surface-fill)"
+  },
+  "--dsw-specific-selector": {
+    "light": "#f5f6f7",
+    "dark": "#353638"
+  },
+  "--dsw-specific-sidebar-fill": {
+    "light": "#f9fafb",
+    "dark": "#1b1b1c"
+  },
+  "--dsw-specific-sidebar-nav-item-active": {
+    "light": "#ebeef2",
+    "dark": "#43454a"
+  },
+  "--dsw-specific-sidebar-nav-item-active-accent": {
+    "light": "#e4edfd",
+    "dark": "#353638"
+  },
+  "--dsw-specific-sidebar-nav-item-hover": {
+    "light": "#f1f3f5",
+    "dark": "#2c2c2e"
+  },
+  "--dsw-specific-tip": {
+    "light": "#f5f6f7",
+    "dark": "#353638"
+  }
+}

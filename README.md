@@ -45,6 +45,20 @@ DSH 的颜色不是一个平面，而是**两层**，只覆盖 alias 会漏：
 
 外加 3 条**结构性规则**（token 表达不了、必须用选择器补）：
 
+外加**代码块**对齐（`.md-code-block` / `[data-code-block-banner]` 都是 DSH 手写的稳定类名）：
+
+| 属性 | 值 | 来源 token |
+|---|---|---|
+| 块底色 | 白 / `#161d18` | `--dsw-alias-bg-layer-1` |
+| 块描边 | `1px` `#dce7dd` / `#2b3a2e` | `--dsw-alias-border-l1` |
+| 块圆角 / 外边距 | `16px` / `12px 0` | — |
+| 顶栏底色 | `#eef5ef` / `#1d271f` | `--dsw-alias-markdown-inline-code` |
+| 顶栏高度 / 内边距 | `36px` / `6px 8px 6px 16px` | — |
+| 行内 code | `#eef5ef`，`3px` 圆角、`4px` 内边距 | `--dsw-alias-markdown-inline-code` |
+
+> 块内 `<pre>` 与顶栏共享 `--dsl-code-block-background`，所以先改这个变量统一底色，
+> 再把顶栏单独盖回薄荷绿。颜色全部走 token，暗色主题自动跟随。
+
 | 规则 | 为什么 |
 |---|---|
 | `body:has([class*="composerHero"])::before` | 底图只在**新建会话欢迎页**出现，加载阶段和对话页都不画 |

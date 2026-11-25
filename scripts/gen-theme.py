@@ -155,9 +155,11 @@ MAP = {
     "markdown-code-block-banner": ("{inset}", "{secondary}"),
     "markdown-code-segment-selected": ("{panel}", "{border}"),
     "markdown-code-segment-unselected": ("{secondary}", "{page}"),
-    "markdown-inline-code": ("{secondary}", "{secondary}"),
+    # 行内 code：源包用比次级底更浅的薄荷绿 #eef5ef，和代码块顶栏同色
+    "markdown-inline-code": ("#eef5ef", "{secondary}"),
     "markdown-placeholder": ("{inset}", "{secondary}"),
-    "markdown-tag": ("{secondary}", "{secondary}"),
+    # 可点击路径 chip：源包 --cr-symbol-background #eef5ef / --cr-symbol-color #2e6943
+    "markdown-tag": ("#eef5ef", "{secondary}"),
     # ── 菜单 / 浮层 ───────────────────────────────────────────────────────
     "menu-group-header-fill": ("#f5f8f5f0", "#1a231cf0"),
     "menu-icon": ("{text}", "{text70}"),

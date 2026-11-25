@@ -92,6 +92,30 @@ body[data-ds-dark-theme]:has([class*="composerHero"])::before {
 [data-platform="darwin"] [class*="sidebarCol"] {
   background-color: var(--dsw-specific-sidebar-fill) !important;
 }
+
+/* ── 代码块：白底 + 1px 描边 + 薄荷绿顶栏（对齐 WorkBuddy 外观包）──────────
+   .md-code-block 是 DSH 手写的稳定类名（同一元素上还挂着构建期 hash 类），
+   [data-code-block-banner] 同样稳定，所以不用绑 hash。
+   块内 <pre> 与顶栏共享 --dsl-code-block-background，先改这个变量统一底色，
+   再把顶栏单独盖回薄荷绿。颜色全部走 token，暗色主题自动跟随。 */
+.md-code-block {
+  --dsl-code-block-background: var(--dsw-alias-bg-layer-1) !important;
+  background: var(--dsw-alias-bg-layer-1) !important;
+  border: 1px solid var(--dsw-alias-border-l1) !important;
+  margin: 12px 0 !important;
+}
+.md-code-block [data-code-block-banner] {
+  background: var(--dsw-alias-markdown-inline-code) !important;
+  height: 36px !important;
+  padding: 6px 8px 6px 16px !important;
+  box-sizing: border-box;
+}
+/* 行内 code：参考包规格是 3px 圆角 / 4px 内边距。:not(pre code) 排除块内代码，
+   块内由 .md-code-block pre code 自己清空底色与内边距。 */
+code:not(pre code) {
+  border-radius: 3px !important;
+  padding-inline: 4px !important;
+}
 `;
 
 /**

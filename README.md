@@ -19,7 +19,10 @@ DSH Web Loader
 
 ```bash
 # 从 GitHub
-dsh plugin --profile web add github:USER/breezy-skin
+dsh plugin --profile web add https://github.com/snap-idea/dsh-breezy-skin
+
+# 等价写法（pnpm 的 github: 简写）
+dsh plugin --profile web add github:snap-idea/dsh-breezy-skin
 
 # 或本地路径
 dsh plugin --profile web add "$PWD"

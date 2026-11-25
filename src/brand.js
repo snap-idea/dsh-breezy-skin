@@ -33,8 +33,12 @@ export function buildBrandScript({ iconSvg, logoSvg, winkSvg, avatarSvg, iconLig
   var AVATAR = ${JSON.stringify(avatarSvg)};
   var ICON_LIGHT = ${JSON.stringify(iconLightUrl)};
   var ICON_DARK = ${JSON.stringify(iconDarkUrl)};
-  var HERO_TEXT = "WorkBuddy，我帮你";
-  var OLD_HERO = "探索未至之境";
+  /* 欢迎页标题按 DSH 当前语言替换：中文走"探索未至之境"，英文走"Into the
+     Unknown"。两者都用 DSH locale 里的原文做键，命中哪个换哪个。 */
+  var HERO_MAP = {
+    "探索未至之境": "WorkBuddy，我帮你",
+    "Into the Unknown": "WorkBuddy，Ideas into reality"
+  };
   var OLD_BOOT = "HARNESS";
   var NEW_BOOT = "WorkBuddy";
   var OLD_TITLE = "DeepSeek Harness";
@@ -125,8 +129,8 @@ export function buildBrandScript({ iconSvg, logoSvg, winkSvg, avatarSvg, iconLig
       var text = node.nodeValue;
       if (!text) continue;
       var trimmed = text.trim();
-      if (trimmed === OLD_HERO) {
-        node.nodeValue = text.replace(OLD_HERO, HERO_TEXT);
+      if (Object.prototype.hasOwnProperty.call(HERO_MAP, trimmed)) {
+        node.nodeValue = text.replace(trimmed, HERO_MAP[trimmed]);
       } else if (trimmed === OLD_BOOT) {
         node.nodeValue = text.replace(OLD_BOOT, NEW_BOOT);
       }

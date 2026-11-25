@@ -93,6 +93,30 @@ body[data-ds-dark-theme]:has([class*="composerHero"])::before {
   background-color: var(--dsw-specific-sidebar-fill) !important;
 }
 
+/* ── 侧栏会话行选中态 ────────────────────────────────────────────────────
+   WorkBuddy 的选中是实心 #cee3d0（.im-conversation-item--selected::before
+   用 --wb-todo-menu-bg-hover，实测 rgb(206,227,208)）。
+   DSH 的选中和 hover 共用同一个 token（.YDXeBa_sessionRow:hover,
+   .YDXeBa_sessionRow.YDXeBa_selected { background: --dsw-alias-interactive-bg-hover }），
+   而那个 token 是全站 hover 用的 8% 主色 —— 直接改它会让所有 hover 变成
+   实心绿块。所以只单独抬「选中」这一态，hover 保持轻盈。
+   类名用语义后缀匹配，不绑 YDXeBa 这个构建期 hash。 */
+[class*="_sessionRow"][class*="_selected"],
+[class*="_searchResultRow"][class*="_selected"] {
+  background: #cee3d0 !important;
+}
+body[data-ds-dark-theme] [class*="_sessionRow"][class*="_selected"],
+body[data-ds-dark-theme] [class*="_searchResultRow"][class*="_selected"] {
+  background: #26312a !important;
+}
+/* 选中底色比侧栏底深一档，行内 60% 的时间戳在上面只有 2.88:1（改造前
+   8% 浅底时是够的，这是选中态变实心带来的回归）。提到 80.4% 后 4.57:1，
+   观感上接近次要文字，是"激活行加强 meta 文字"的常见处理。
+   暗色选中底 #26312a 上 60% 已有 4.96:1，不需要抬。 */
+body:not([data-ds-dark-theme]) [class*="_selected"] [class*="_time"] {
+  color: #2f4938cd !important;
+}
+
 /* ── 代码块：白底 + 1px 描边 + 薄荷绿顶栏（对齐 WorkBuddy 外观包）──────────
    .md-code-block 是 DSH 手写的稳定类名（同一元素上还挂着构建期 hash 类），
    [data-code-block-banner] 同样稳定，所以不用绑 hash。

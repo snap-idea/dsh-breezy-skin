@@ -148,6 +148,26 @@ def main() -> int:
                 )
         print()
 
+    # ── 结构规则配对 ──────────────────────────────────────────────────────
+    # 侧栏会话行选中态不走 token，颜色写死在 src/index.js 的 STRUCTURE_CSS 里
+    # （因为 DSH 的选中和 hover 共用同一个 token，改 token 会波及全站 hover）。
+    # 这里按同样的门槛单独校验，避免"写了规则但没进审计"的死角。
+    # 改 index.js 里那两个色值时必须同步改这里。
+    STRUCTURAL = [
+        ("light", "#2f4938e6", "#cee3d0", 4.5, "选中行 正文 / 选中底"),
+        ("light", "#2f4938cd", "#cee3d0", 4.5, "选中行 时间戳 / 选中底"),
+        ("dark",  "#e0e9e2",   "#26312a", 4.5, "选中行 正文 / 选中底"),
+        ("dark",  "#e0e9e299", "#26312a", 4.5, "选中行 时间戳 / 选中底"),
+    ]
+    print("── 结构规则配对（index.js 硬编码）─────────────────────────────")
+    for scheme, fg, bg, floor, label in STRUCTURAL:
+        mine = contrast(to_rgba(fg), to_rgba(bg))
+        ok = mine >= floor
+        print(f"  {'OK  ' if ok else 'FAIL'} {mine:5.2f} (>= {floor:.1f})  {scheme:<5} {label:<26} {fg} on {bg}")
+        if not ok:
+            problems.append(f"{scheme}: {label} 低于 {floor:.1f}，实为 {mine:.2f}  ({fg} on {bg})")
+    print()
+
     if problems:
         print("!! 未通过:")
         for p in problems:

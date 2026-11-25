@@ -2,6 +2,8 @@
 
 **有风 / Breezy** 皮肤 for [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)（DSH）Web。
 
+![breezy-skin：明 / 暗 × 中 / 英](docs/screenshot.jpg)
+
 把 WorkBuddy「有风 Breezy」外观包的配色完整移植到 DSH 的原生 token 体系，并把自然底图
 限定在**新建会话欢迎页**；同时把 DSH 的 DeepSeek 品牌整体替换成 WorkBuddy。
 纯 Host 侧 Cordis 插件 —— 不改 DSH 安装包、不需要浏览器扩展、不需要 CDP 注入、

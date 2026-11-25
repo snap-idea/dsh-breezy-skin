@@ -1,7 +1,7 @@
 {
   "name": "breezy-skin",
   "version": "0.1.0",
-  "description": "Breezy (有风) skin for DeepSeek Harness Web: overrides 107 --dsw-alias-* semantic tokens plus 10 --dsw-specific-* component tokens, and scopes a nature background image to the new-session welcome screen. Host-only Cordis plugin — no browser extension, no CDP, no client bundle.",
+  "description": "究极NTR,让dsh(deepseek harness)变成workbuddy的形状",
   "type": "module",
   "main": "src/index.js",
   "icon": "./assets/icon.png",

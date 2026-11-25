@@ -107,14 +107,32 @@ DSH 把品牌写死在客户端 bundle 里，Host 侧没有对应配置项。`sr
 | 次要文字 | `#2f4938c7` | `#e3ece4b3` | `--dsw-alias-label-secondary` |
 | 描边 | `#dce7dd` | `#2b3a2e` | `--dsw-alias-border-l1` |
 
-暗色是**推导**的「森林夜」——源包只有浅色，推导保持同一色相与层级关系。
+### 暗色「森林夜」
+
+WorkBuddy 的 Breezy 只有浅色版，暗色按
+[dark-mode-converter](https://github.com/OneWave-AI/claude-skills) 方法论**推导**，
+并用 [color-palette](https://github.com/ArnavPuri/designskills) 方法论**审核**：
+
+| 规则 | 落实 |
+|---|---|
+| 基色深灰非纯黑 | `#0e110f`（OKLCH L=0.173，朝品牌绿相微偏） |
+| 抬升面越亮 | `.150 → .173 → .195 → .217 → .254 → .291` 单调递增 |
+| 文字 off-white | `#e0e9e2`（非 `#ffffff`） |
+| 边框低透明度白 | `rgba(224,233,226, .08/.20/.28)` |
+| 强调色提亮降饱和 | `#2e6943` → `#79cd94` |
+
+14 组文字/表面配对全部 ≥ AA。**已知偏差**：`border-l3/l4` 为 1.69/2.21:1，
+未达 SC 1.4.11 的 3:1 —— 严格达标需 `alpha ≥ 0.42`，暗色下是刺眼白边，
+故按主流暗色系统取舍。详见 [dark-mode-report.md](dark-mode-report.md)。
 
 ## 验证
 
 ```bash
-npm run theme   # 重新生成 src/theme.css
-npm run audit   # WCAG 2.1 对比度审计（31 组配对 × 亮暗 = 62 项）
-npm run check   # 插件语法
+npm run theme         # 由调色板重新生成 src/theme.css
+npm run derive:dark   # OKLCH 推导暗色调色板（含对比度验证）
+npm run audit         # WCAG 2.1 对比度审计（31 组配对 × 亮暗 = 62 项）
+npm run audit:palette # color-palette 审核：色相稳定性/色度/抬升梯/非文字 3:1
+npm run verify        # check + audit + audit:palette 全跑
 ```
 
 审计按 token 角色套用绝对阈值：正文 9.21:1（AA 需 4.5）、次要 5.05:1、三级 3.19:1、
@@ -147,8 +165,10 @@ locale/
 ├── en.json         # 插件列表标题 / 描述
 └── zh.json
 scripts/
-├── gen-theme.py    # 调色板 → theme.css
-└── audit-contrast.py
+├── gen-theme.py      # 调色板 → theme.css
+├── derive-dark.py    # OKLCH 推导暗色调色板
+├── audit-contrast.py # WCAG 对比度审计
+└── audit-palette.py  # color-palette 方法论审核
 data/
 ├── dsh-alias-baseline.json     # DSH 0.2.1-rc.5 的 107 个 alias 默认值
 └── dsh-specific-baseline.json  # 11 个 specific 默认值

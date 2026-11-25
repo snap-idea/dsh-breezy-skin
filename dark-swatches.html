@@ -1,0 +1,67 @@
+<!doctype html><html lang="zh"><head><meta charset="utf-8">
+<title>breezy-skin · dark swatches</title>
+<style>
+ body{margin:0;padding:28px 32px;background:#0e110f;color:#e0e9e2;
+   font:14px/1.6 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif}
+ h1{font-size:19px;margin:0 0 4px;font-weight:600}
+ h2{font-size:14px;margin:26px 0 10px;font-weight:600;color:#e0e9e2c5;
+    text-transform:uppercase;letter-spacing:.06em}
+ .sub{color:#e0e9e2c5;font-size:13px;margin-bottom:6px}
+ .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px}
+ .sw{border:1px solid rgba(224,233,226,.08);border-radius:10px;padding:10px}
+ .chip{height:42px;border-radius:6px;border:1px solid rgba(224,233,226,.14)}
+ .meta{margin-top:8px;display:flex;flex-direction:column;gap:2px}
+ .meta b{font-size:12px;font-weight:500}
+ .meta code{font-size:11px;color:#e0e9e2c5;font-family:ui-monospace,monospace}
+ .demo{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:8px}
+ .card{border-radius:12px;padding:14px;border:1px solid rgba(224,233,226,.08)}
+ .btn{display:inline-block;padding:6px 14px;border-radius:100px;font-size:13px;font-weight:500}
+ .tag{display:inline-block;padding:1px 8px;border-radius:100px;font-size:13px;font-weight:500}
+</style></head><body>
+<h1>breezy-skin · 暗色主题 swatch</h1>
+<div class="sub">由 scripts/derive-dark.py 按 dark-mode-converter 推导；OKLCH 色相跨度 5.3°，抬升梯单调递增</div>
+
+<h2>表面（越往下越高）</h2><div class="grid"><div class="sw"><div class="chip" style="background:#0e110f"></div><div class="meta"><b>bg-base</b><code>#0e110f</code></div></div><div class="sw"><div class="chip" style="background:#171b18"></div><div class="meta"><b>bg-layer-1</b><code>#171b18</code></div></div><div class="sw"><div class="chip" style="background:#1f2420"></div><div class="meta"><b>bg-layer-2</b><code>#1f2420</code></div></div><div class="sw"><div class="chip" style="background:#282d29"></div><div class="meta"><b>bg-layer-3</b><code>#282d29</code></div></div><div class="sw"><div class="chip" style="background:#121613"></div><div class="meta"><b>sidebar-fill</b><code>#121613</code></div></div><div class="sw"><div class="chip" style="background:#1f2420"></div><div class="meta"><b>bubble</b><code>#1f2420</code></div></div><div class="sw"><div class="chip" style="background:#090c0a"></div><div class="meta"><b>markdown-code-block</b><code>#090c0a</code></div></div></div>
+
+<h2>文字 / 强调</h2><div class="grid"><div class="sw"><div class="chip" style="background:#e0e9e2"></div><div class="meta"><b>label-primary</b><code>#e0e9e2</code></div></div><div class="sw"><div class="chip" style="background:#e0e9e2c5"></div><div class="meta"><b>label-secondary</b><code>#e0e9e2c5</code></div></div><div class="sw"><div class="chip" style="background:#e0e9e299"></div><div class="meta"><b>label-tertiary</b><code>#e0e9e299</code></div></div><div class="sw"><div class="chip" style="background:#e0e9e28c"></div><div class="meta"><b>label-caption</b><code>#e0e9e28c</code></div></div><div class="sw"><div class="chip" style="background:#79cd94"></div><div class="meta"><b>brand-primary</b><code>#79cd94</code></div></div><div class="sw"><div class="chip" style="background:#79cd94"></div><div class="meta"><b>link</b><code>#79cd94</code></div></div><div class="sw"><div class="chip" style="background:#f57272"></div><div class="meta"><b>state-error-primary</b><code>#f57272</code></div></div><div class="sw"><div class="chip" style="background:#e0a556"></div><div class="meta"><b>state-warn-label</b><code>#e0a556</code></div></div></div>
+
+<h2>真实组合</h2>
+<div class="demo">
+  <div class="card" style="background:#171b18">
+    <div style="font-size:16px;font-weight:600;margin-bottom:6px">卡片标题</div>
+    <div style="color:#e0e9e2c5;margin-bottom:10px">次要说明文字 77%</div>
+    <div style="color:#e0e9e28c;font-size:12px;margin-bottom:12px">说明/占位 54.9%</div>
+    <span class="btn" style="background:#79cd94;color:#171b18">主操作</span>
+    <span class="tag" style="background:#1f2420;color:#e0e9e2e6;margin-left:6px">/skill</span>
+  </div>
+  <div class="card" style="background:#1f2420">
+    <div style="color:#e0e9e2;margin-bottom:8px">次面 #1f2420 上的正文</div>
+    <div style="color:#e0e9e2c5;margin-bottom:10px">次要文字 8.77:1</div>
+    <div style="background:#090c0a;border:1px solid rgba(224,233,226,.08);border-radius:8px;padding:8px;font-family:ui-monospace,monospace;font-size:12px">
+      <div style="color:#e0e9e2">const x = 1;</div>
+      <div style="color:#79cd94">// 内凹代码块 #090c0a</div>
+    </div>
+  </div>
+  <div class="card" style="background:#282d29">
+    <div style="color:#e0e9e2;margin-bottom:8px">抬升面 3 #282d29（弹层）</div>
+    <div style="color:#e0e9e2c5;margin-bottom:8px">正文 11.30:1</div>
+    <div style="display:flex;gap:8px">
+      <span class="tag" style="background:#2a302b;color:#e0e9e2e6">标签</span>
+      <span class="tag" style="background:#232823;color:#e0e9e2e6">hover</span>
+    </div>
+    <div style="margin-top:10px;color:#f57272;font-size:13px">错误色 #f57272 · 5.03:1</div>
+  </div>
+</div>
+
+<h2>边框阶（低透明度白）</h2>
+<div class="grid">
+  <div class="sw"><div class="chip" style="background:rgba(224,233,226,.08)"></div>
+    <div class="meta"><b>l1 / l2 · 0.08</b><code>1.18:1 · 装饰线豁免</code></div></div>
+  <div class="sw"><div class="chip" style="background:rgba(224,233,226,.20)"></div>
+    <div class="meta"><b>l3 · 0.20</b><code>1.69:1</code></div></div>
+  <div class="sw"><div class="chip" style="background:rgba(224,233,226,.28)"></div>
+    <div class="meta"><b>l4 · 0.28</b><code>2.21:1</code></div></div>
+  <div class="sw"><div class="chip" style="background:rgba(224,233,226,.42)"></div>
+    <div class="meta"><b>3:1 所需 · 0.42</b><code>未采用（白边刺眼）</code></div></div>
+</div>
+</body></html>

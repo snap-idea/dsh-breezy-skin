@@ -31,41 +31,64 @@ L = {
     "brandDeepest": "#21472b",
     "brandBright": "#59ac65",
     "brandHover": "#4c9358",
-    "page": "#f5f8f5",
+    # 页面底色：WorkBuddy 主内容区/顶栏/输入框区实测 #fcfefc
+    # （zip 的 theme.json 写 #f5f8f5，但线上外观包已更新）
+    "page": "#fcfefc",
     "panel": "#ffffff",
     "secondary": "#e8f0e9",
     "inset": "#eef5ef",
     "sidebar": "#e3ece4",
     "border": "#dce7dd",
+    # WorkBuddy: --cr-border-default / --cb-stroke-secondary / --cb-input-border-color
+    "hairline": "#eff6f0",
+    # WorkBuddy: --cb-border-default（卡片/表头等实心边框）
+    "borderMid": "#dbeadd",
     "borderStrong": "#cfe0d1",
     "borderStronger": "#bcd2bf",
     "text": "#2f4938",
     "text90": "#2f4938e6",
-    "text70": "#2f4938c7",
+    # 次要文字：WorkBuddy 原值 #2f4938b3（70%），但在侧栏底 #e3ece4 上只有
+    # 3.82:1，低于 WCAG AA 4.5。取 77.25%（#2f4938c5）—— 这是逐字节扫描出的
+    # 最小达标值，能同时过页面底/卡片/侧栏三面（5.09 / 5.16 / 4.56）。
+    # 注释里写 77% 即可，c5 = 197/255 = 0.7725。
+    "text70": "#2f4938c5",
     "text60": "#2f493899",
     "text40": "#2f493880",
 }
 
 # ── 森林夜（由 Breezy 推导的深色变体）──────────────────────────────────────
 D = {
-    "brand": "#7cc98a",
-    "brandDeep": "#a8e6b0",
-    "brandDeepest": "#d7f5da",
-    "brandBright": "#a8e6b0",
-    "brandHover": "#8fd79c",
-    "page": "#101613",
-    "panel": "#161d18",
-    "secondary": "#1d271f",
-    "inset": "#1a231c",
-    "sidebar": "#131a15",
-    "border": "#2b3a2e",
-    "borderStrong": "#36473a",
-    "borderStronger": "#415446",
-    "text": "#e3ece4",
-    "text90": "#e3ece4e6",
-    "text70": "#e3ece4b3",
-    "text60": "#e3ece499",
-    "text40": "#e3ece466",
+    # ── 按 dark-mode-converter 方法论推导（scripts/derive-dark.py）──────────
+    # 1) 基色深灰非纯黑，朝品牌色相（绿）微偏
+    # 2) 抬升面越亮：inset .150 < page .173 < sidebar .195 < panel .217
+    #    < secondary .254 < raised3 .291（L 值为 OKLCH 明度，单调递增）
+    # 3) 文字 off-white #e0e9e2，不用纯白
+    # 4) 边框用低透明度白（见 hairlineDark / borderMidDark）
+    # 5) 强调色提亮 + 降饱和：#2e6943 → #79cd94
+    "page": "#0e110f",
+    "sidebar": "#121613",
+    "panel": "#171b18",
+    "secondary": "#1f2420",
+    "inset": "#090c0a",
+    "raised3": "#282d29",
+    # 以下三个是"填充"用途的实心色（按钮/浮层底），不是描边
+    "border": "#2a302b",
+    "borderStrong": "#343a35",
+    "borderStronger": "#3f453f",
+    # 描边专用：低透明度白，替代实心绿灰
+    "hairlineDark": "rgba(224, 233, 226, 0.08)",
+    "borderMidDark": "rgba(224, 233, 226, 0.20)",
+    "borderStrongDark": "rgba(224, 233, 226, 0.28)",
+    "text": "#e0e9e2",
+    "text90": "#e0e9e2e6",
+    "text70": "#e0e9e2c5",
+    "text60": "#e0e9e299",
+    "text40": "#e0e9e28c",
+    "brand": "#79cd94",
+    "brandHover": "#86d69f",
+    "brandDeep": "#acdeba",
+    "brandDeepest": "#d2edd8",
+    "brandBright": "#acdeba",
 }
 
 # 语义映射：alias 名 -> (light expression, dark expression)
@@ -79,8 +102,10 @@ MAP = {
     # 设置面板（.VOzbGW_panel）等「抬升表面」消费这一层。
     # DSH 默认 layer-1/2/3 全是 #fff（不区分层级）；Breezy 取近白 #f6f8f5，
     # 让设置面板比页面底 #f5f8f5 略亮一点点，而不是原来偏重的 #e8f0e9。
-    "bg-layer-2": ("#f6f8f5", "{secondary}"),
-    "bg-layer-3": ("{inset}", "{border}"),
+    # 次面：WorkBuddy --cb-bg-secondary #f5faf6
+    "bg-layer-2": ("#f5faf6", "{secondary}"),
+    # 抬升面：WorkBuddy --cb-bg-tertiary #fcfefc
+    "bg-layer-3": ("#fcfefc", "{raised3}"),
     "bg-mask-1": ("#2f493814", "#00000080"),
     "bg-mask-2": ("#2f49380d", "#0003"),
     "bg-mask-3": ("#2f493866", "#0000007a"),
@@ -93,11 +118,11 @@ MAP = {
     # ── 描边 ──────────────────────────────────────────────────────────────
     "border-inverted": ("#0000", "#ffffff0f"),
     "border-inverted2": ("#0000", "#ffffff14"),
-    "border-l1": ("{border}", "{border}"),
-    "border-l2": ("{border}", "{border}"),
-    "border-l2-darkmode-thin": ("{border}", "{border}"),
-    "border-l3": ("{borderStrong}", "{borderStrong}"),
-    "border-l4": ("{borderStronger}", "{borderStronger}"),
+    "border-l1": ("{hairline}", "{hairlineDark}"),
+    "border-l2": ("{hairline}", "{hairlineDark}"),
+    "border-l2-darkmode-thin": ("{hairline}", "{hairlineDark}"),
+    "border-l3": ("{borderMid}", "{borderMidDark}"),
+    "border-l4": ("{borderStronger}", "{borderStrongDark}"),
     # ── 品牌 ──────────────────────────────────────────────────────────────
     "brand-primary": ("{brand}", "{brand}"),
     "brand-primary-invert": ("{brand}", "{brand}"),
@@ -140,7 +165,7 @@ MAP = {
     "label-deep-diving-shimmer": ("{brandBright}", "{brandBright}"),
     "label-dimmed": ("#dbe7dc", "{borderStrong}"),
     "label-document-preview": ("{text70}", "{text70}"),
-    "label-primary": ("{text}", "{text}"),
+    "label-primary": ("{text90}", "{text}"),
     "label-primary-bluish": ("{brandDeepest}", "{text}"),
     "label-primary-dimmed": ("{text90}", "{text90}"),
     "label-primary-foreground": ("#ffffff", "#101613"),
@@ -151,7 +176,9 @@ MAP = {
     "link": ("{brand}", "{brand}"),
     # ── Markdown ──────────────────────────────────────────────────────────
     "markdown-citation": ("{secondary}", "{border}"),
-    "markdown-code-block": ("{secondary}", "{page}"),
+    # 代码块基色：WorkBuddy --cb-markdown-code-block-bg #eef5ef
+    # （块级外壳由 .md-code-block 结构规则覆盖成白卡片）
+    "markdown-code-block": ("{inset}", "{inset}"),
     "markdown-code-block-banner": ("{inset}", "{secondary}"),
     "markdown-code-segment-selected": ("{panel}", "{border}"),
     "markdown-code-segment-unselected": ("{secondary}", "{page}"),
@@ -185,8 +212,8 @@ MAP = {
     # ── 状态色 ────────────────────────────────────────────────────────────
     "state-business-primary": ("{brand}", "{brand}"),
     "state-business-tertiary": ("#e3f0e5", "#1c2f22"),
-    "state-error-primary": ("#b83c3c", "#f25a5a"),
-    "state-error-secondary": ("#c95656", "#f25a5a"),
+    "state-error-primary": ("#b83c3c", "#f57272"),
+    "state-error-secondary": ("#c95656", "#f88a8a"),
     "state-idle-primary": ("{borderStrong}", "{borderStrong}"),
     "state-success-primary": ("#357a43", "{brandBright}"),
     "state-success-secondary": ("#4a9159", "#8fd79c"),
@@ -204,22 +231,19 @@ MAP = {
 # 的例子：DSH 默认取 DeepSeek 品牌浅蓝 #edf3fe，只覆盖 alias 完全碰不到它。
 # 值留空（不在本表里）= 保持基线，用于 --dsw-specific-menu 这类 var() 引用。
 SPECIFIC_MAP = {
-    # 用户消息气泡：Breezy 浅薄荷绿（对应参考 CSS 的 --cr-user-bubble-bg）
-    "--dsw-specific-bubble": ("#eef5ef", "#1d271f"),
-    # 气泡高亮（跳转到消息时）：比气泡深一档
-    "--dsw-specific-bubble-highlight": ("#dce7dd", "#2b3a2e"),
-    # 主输入框 / 登录输入框
-    "--dsw-specific-input-major": ("#ffffff", "#1d271f"),
-    "--dsw-specific-login-input": ("#f5f8f5", "#161d18"),
-    # 选择器下拉
-    "--dsw-specific-selector": ("#eef5ef", "#2b3a2e"),
-    # 左侧栏：Breezy 的 #e3ece4 侧栏底色
-    "--dsw-specific-sidebar-fill": ("#e3ece4", "#131a15"),
-    "--dsw-specific-sidebar-nav-item-active": ("#d5e4d7", "#2b3a2e"),
-    "--dsw-specific-sidebar-nav-item-active-accent": ("#cfe0d1", "#36473a"),
-    "--dsw-specific-sidebar-nav-item-hover": ("#dce7dd", "#232f25"),
-    # 提示条
-    "--dsw-specific-tip": ("#eef5ef", "#2b3a2e"),
+    # 亮色列沿用 WorkBuddy Breezy 实测值；暗色列改用 derive-dark.py 推导的
+    # 新色阶（page .173 / sidebar .195 / panel .217 / secondary .254 / raised3 .291）
+    # —— 早期版本这里是硬编码的旧暗色，与本轮暗色主题不一致。
+    "--dsw-specific-bubble": ("#eef5ef", "#1f2420"),            # 气泡底 = 次面
+    "--dsw-specific-bubble-highlight": ("#dce7dd", "#2a302b"),  # 高亮 = 抬升填充
+    "--dsw-specific-input-major": ("#ffffff", "#1f2420"),       # 主输入框
+    "--dsw-specific-login-input": ("#f5f8f5", "#171b18"),       # 登录输入框 = 卡片
+    "--dsw-specific-selector": ("#eef5ef", "#282d29"),          # 选择器 = 抬升面3
+    "--dsw-specific-sidebar-fill": ("#e3ece4", "#121613"),      # 侧栏
+    "--dsw-specific-sidebar-nav-item-active": ("#d5e4d7", "#282d29"),
+    "--dsw-specific-sidebar-nav-item-active-accent": ("#cfe0d1", "#343a35"),
+    "--dsw-specific-sidebar-nav-item-hover": ("#dce7dd", "#232823"),
+    "--dsw-specific-tip": ("#eef5ef", "#282d29"),               # 提示条 = 抬升面3
 }
 
 

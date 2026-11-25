@@ -116,6 +116,130 @@ code:not(pre code) {
   border-radius: 3px !important;
   padding-inline: 4px !important;
 }
+
+/* ── 表格：白卡片 + 薄荷绿表头（对齐 WorkBuddy .cr-table-block）────────────
+   WorkBuddy 实测结构：
+     .cr-table-block__scroller { border:1px solid var(--cr-border-default)=#eff6f0;
+                                 background:--cr-bg-primary=#fff; border-radius:16px }
+     th { background:var(--cr-bg-code-header)=#eef5ef; font-weight:600 }
+     th,td { border-right:1px solid #eff6f0; padding:8px 16px; font-size:15px }
+     td { border-top:1px solid #eff6f0 }
+     无行 hover（.wb-table--hover 是设置页的数据表格，不是 markdown 表格）
+   DSH 的表格外壳带稳定类 .md-table-wide，单元格是 border-bottom 结构，
+   这里只对齐「外观色 + 表头底色 + 卡片描边」，不改变 DSH 的行列边框结构。 */
+.md-table-wide {
+  border: 1px solid var(--dsw-alias-border-l1) !important;
+  border-radius: 16px !important;
+  background: var(--dsw-alias-bg-layer-1) !important;
+}
+.md-table-wide table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.md-table-wide th {
+  background: var(--dsw-alias-markdown-inline-code) !important;
+  font-weight: 600 !important;
+  border-bottom-color: var(--dsw-alias-border-l1) !important;
+}
+.md-table-wide td {
+  border-bottom-color: var(--dsw-alias-border-l1) !important;
+}
+
+/* ── 引用块 / 分割线（对齐 WorkBuddy）──────────────────────────────────────
+   WorkBuddy:
+     .cr-blockquote { border-left:4px solid var(--cr-border-default)=#eff6f0;
+                      padding-left:12px }
+     .cr-markdown hr { border-top:1px solid #eff6f0; margin:20px 0 }
+   DSH 原生是 2px #2f493880 引用条、0.5px #dce7dd 分割线（margin 32px）。
+   用 [class*="_markdown_"] 锚定，不依赖构建期 hash 后缀。 */
+[class*="_markdown_"] blockquote {
+  border-left: 4px solid var(--dsw-alias-border-l1) !important;
+  padding-left: 12px !important;
+}
+[class*="_markdown_"] hr {
+  height: 0 !important;
+  border: 0 !important;
+  border-top: 1px solid var(--dsw-alias-border-l1) !important;
+  background: none !important;
+  margin: 20px 0 !important;
+}
+
+/* ── Skill / 文件引用 chip：内联彩色文字 → 薄荷绿胶囊 ────────────────────
+   DSH 的 ReferenceChip 会渲染 data-ref-chip="skill|command|file" 属性，这是稳定
+   锚点（类名 _refChip_xxxxx 是构建期 hash）。原生形态是纯内联文字，只有主色
+   + 500 字重，没有底色。
+
+   数值来自 WorkBuddy 实机（CDP 直读，非推测）：
+     ._skillTag_ { box-sizing:border-box; background:var(--cr-tag-skill-bg);
+                   border-radius:100px; height:23px; padding:1px 8px;
+                   font-size:13px; font-weight:500; line-height:21px !important;
+                   display:inline-flex }
+     ._tag_      { color:var(--cr-text-primary)=#2f4938e6; gap:4px;
+                   align-items:center; max-width:calc(100% - 4px) }
+     ._inlineTag_{ margin-inline:4px }
+   实测 --cr-tag-skill-bg = #eef5ef / hover #edf5ee / active #e3efe4。
+   注意：WorkBuddy 的 Breezy 只有浅色版，暗色值是按本主题既有色阶推导的。 */
+[data-ref-chip="skill"],
+[data-ref-chip="command"],
+[data-ref-chip="file"] {
+  box-sizing: border-box;
+  display: inline-flex !important;
+  align-items: center !important;
+  height: 23px !important;
+  padding: 1px 8px !important;
+  border: 0 !important;
+  border-radius: 100px !important;
+  background: #eef5ef !important;
+  color: #2f4938e6 !important;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 21px !important;
+  gap: 4px;
+  max-width: calc(100% - 4px);
+  margin-inline: 4px;
+  vertical-align: middle;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  user-select: none;
+}
+[data-ref-chip="skill"]:hover,
+[data-ref-chip="command"]:hover,
+[data-ref-chip="file"]:hover {
+  background: #edf5ee !important;
+}
+[data-ref-chip="skill"]:focus-visible,
+[data-ref-chip="command"]:focus-visible,
+[data-ref-chip="file"]:focus-visible {
+  background: #e3efe4 !important;
+}
+/* 图标：WorkBuddy 是 14×14；DSH 的 refIcon 原生 1em（13px）且带 4px 右边距，
+   这里统一成 14px 并去掉右边距，避免与 gap 叠加成 8px。 */
+[data-ref-chip="skill"] > svg,
+[data-ref-chip="command"] > svg,
+[data-ref-chip="file"] > svg {
+  width: 14px !important;
+  height: 14px !important;
+  flex-shrink: 0;
+  margin-right: 0 !important;
+}
+/* 暗色：WorkBuddy 无暗色版，沿用本主题的气泡/侧栏色阶 */
+body[data-ds-dark-theme] [data-ref-chip="skill"],
+body[data-ds-dark-theme] [data-ref-chip="command"],
+body[data-ds-dark-theme] [data-ref-chip="file"] {
+  background: #1f2420 !important;
+  color: #e0e9e2e6 !important;
+}
+body[data-ds-dark-theme] [data-ref-chip="skill"]:hover,
+body[data-ds-dark-theme] [data-ref-chip="command"]:hover,
+body[data-ds-dark-theme] [data-ref-chip="file"]:hover {
+  background: #232823 !important;
+}
+body[data-ds-dark-theme] [data-ref-chip="skill"]:focus-visible,
+body[data-ds-dark-theme] [data-ref-chip="command"]:focus-visible,
+body[data-ds-dark-theme] [data-ref-chip="file"]:focus-visible {
+  background: #2a302b !important;
+}
 `;
 
 /**

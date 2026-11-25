@@ -33,8 +33,11 @@
   },
   "scripts": {
     "theme": "python3 scripts/gen-theme.py",
+    "derive:dark": "python3 scripts/derive-dark.py",
     "audit": "python3 scripts/audit-contrast.py",
-    "check": "node --check src/index.js"
+    "audit:palette": "python3 scripts/audit-palette.py",
+    "check": "node --check src/index.js",
+    "verify": "npm run check && npm run audit && npm run audit:palette"
   },
   "repository": {
     "type": "git",

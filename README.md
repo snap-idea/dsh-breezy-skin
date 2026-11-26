@@ -130,6 +130,27 @@ WorkBuddy 的 Breezy 只有浅色版，暗色按
 未达 SC 1.4.11 的 3:1 —— 严格达标需 `alpha ≥ 0.42`，暗色下是刺眼白边，
 故按主流暗色系统取舍。详见 [dark-mode-report.md](dark-mode-report.md)。
 
+## VS Code 主题
+
+同一套配色也做成了两个 VS Code 主题，独立仓库维护：
+
+**https://github.com/snap-idea/vscode-breezy-theme**
+
+| 主题 | uiTheme |
+|---|---|
+| **Workbuddy Breezy Light** | `vs` |
+| **Workbuddy Breezy Dark** | `vs-dark` |
+
+`palette.json` 是这边的调色板快照，由 `scripts/export-palette.py` 从 `src/theme.css`
+导出，主题仓库消费它来生成两个主题。**dsh-breezy-skin 是调色板的唯一真源** ——
+改色在这里改，然后：
+
+```bash
+npm run theme           # 重新生成 src/theme.css
+npm run export:palette  # 重新导出 palette.json
+# 把 palette.json 复制到 vscode-breezy-theme 并提交
+```
+
 ## 验证
 
 ```bash
@@ -137,6 +158,7 @@ npm run theme         # 由调色板重新生成 src/theme.css
 npm run derive:dark   # OKLCH 推导暗色调色板（含对比度验证）
 npm run audit         # WCAG 2.1 对比度审计（31 组配对 × 亮暗 = 62 项）
 npm run audit:palette # color-palette 审核：色相稳定性/色度/抬升梯/非文字 3:1
+npm run export:palette # 导出 palette.json 给 vscode-breezy-theme 仓库
 npm run verify        # check + audit + audit:palette 全跑
 ```
 
@@ -173,7 +195,11 @@ scripts/
 ├── gen-theme.py      # 调色板 → theme.css
 ├── derive-dark.py    # OKLCH 推导暗色调色板
 ├── audit-contrast.py # WCAG 对比度审计
-└── audit-palette.py  # color-palette 方法论审核
+├── audit-palette.py  # color-palette 方法论审核
+├── export-palette.py # src/theme.css → palette.json（给 VS Code 主题仓库）
+palette.json        # 调色板快照，供 vscode-breezy-theme 消费
+docs/
+└── screenshot.jpg  # README 效果图
 data/
 ├── dsh-alias-baseline.json     # DSH 0.2.1-rc.5 的 107 个 alias 默认值
 └── dsh-specific-baseline.json  # 11 个 specific 默认值

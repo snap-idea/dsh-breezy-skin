@@ -37,7 +37,8 @@
     "audit": "python3 scripts/audit-contrast.py",
     "audit:palette": "python3 scripts/audit-palette.py",
     "check": "node --check src/index.js",
-    "verify": "npm run check && npm run audit && npm run audit:palette"
+    "verify": "npm run check && npm run audit && npm run audit:palette",
+    "export:palette": "python3 scripts/export-palette.py"
   },
   "repository": {
     "type": "git",
